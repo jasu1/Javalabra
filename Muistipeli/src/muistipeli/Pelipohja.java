@@ -1,3 +1,5 @@
+package muistipeli;
+
 
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -6,6 +8,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * 
+ * @author jarih
+ */
 public class Pelipohja extends JPanel {
 
 	/** Käytettyjen arvausten määrä */
@@ -35,7 +41,9 @@ public class Pelipohja extends JPanel {
 	/** Totuusarvo (onko ajastin päällä) */
 	private boolean ajastinpaalla=false; 
 
-	/** Alustaa uuden pelipohjan */
+        /** Alustaa uuden pelipohjan
+         * @param ikkuna 
+         */
         public Pelipohja(Muistipeli ikkuna) {
             this.ikkuna=ikkuna;
             uusiPeli();
@@ -87,10 +95,7 @@ public class Pelipohja extends JPanel {
             
             /** Ajastimen määräämä toiminto (piilottaa käännetyt kortit
               * näkyvistä jos säädetty aikaraja tulee vastaan */
-        @Override // Tämä on mielestäni turha valitus...kuten muutkin vastaavat,
-                  // koska (ainakaan tämä) ohjelma ei toimiakseen tarvitse tätä.
-                  // Joka tapauksessa en ymmärrä "overriden" funktiota
-                  // käytännön kannalta!??!!
+        @Override 
             public void run() {
             kaannettykortti[0].piilotaKuva();
             kaannettykortti[1].piilotaKuva();
@@ -158,8 +163,9 @@ public class Pelipohja extends JPanel {
         
         
         
-        /** Arvotaan kortit */
-        private int[] uudetKortit() {
+        /** Arvotaan kortit 
+          * @return Aputaulukko */
+         private int[] uudetKortit() {
             
             // Kortit "kahdennetaan"
             int indeksienmaara=korttipareja*2;
@@ -186,12 +192,16 @@ public class Pelipohja extends JPanel {
         }
 
 
-	/** Totuusarvo (onko peli ratkaistu) */
+	/** Totuusarvo (onko peli ratkaistu) 
+          * @return korttipareja
+          */
 	public boolean onkoRatkaistu() {
             return (this.korttipareja==0);
         }
 
-	/** Totuusarvo (onko siirtoja tehty) */
+        /** Totuusarvo (onko siirtoja tehty)
+         * @return arvaukset
+         */
 	public boolean onkoAloitettu() {
             return (this.arvaukset!=0);
         }
@@ -214,12 +224,16 @@ public class Pelipohja extends JPanel {
             arvattu_txt.setText("Arvaukset: "+arvaukset);
 	}
 
-	/** Palauttaa pelaajan arvaukset */
+        /** Palauttaa pelaajan arvaukset
+         * @return arvausten määrä
+         */
 	public JLabel naytaArvaukset() {
             return arvattu_txt;
         }
 
-	/** Palauttaa jäljellä olevien parien määrän */
+        /** Palauttaa jäljellä olevien parien määrän
+         * @return jäljellä olevien parien määärä
+         */
 	public JLabel naytaParit() {
             return parejajaljella_txt;
         }
