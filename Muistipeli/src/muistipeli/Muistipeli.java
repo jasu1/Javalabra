@@ -23,11 +23,13 @@ public class Muistipeli {
      * Pelin pohja mihin kaikki muut pelin elementit sijoitetaan
      */
     private Pelipohja pelipohja;
+    
     /**
      * Liikennemerkkiryhmä: ryhmään kuuluvat eri liikennemerkit tarkoituksensa
      * mukaan jaoteltuna
      */
     private int merkkilaji;
+    
     /**
      * Ikkuna johon peli muodostetaan
      */

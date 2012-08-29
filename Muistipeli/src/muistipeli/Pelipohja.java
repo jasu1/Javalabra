@@ -19,38 +19,47 @@ public class Pelipohja extends JPanel {
      * Käytettyjen arvausten määrä
      */
     private int arvaukset = -1;
+    
     /**
      * Pelin korttiparien määrä
      */
     private int korttipareja = -1;
+    
     /**
      * Pelissä olevat kortit
      */
     private Kortit[] pelinkortit;
+    
     /**
      * Tekstinä kuinka monta arvausta käytetty
      */
     private JLabel arvattu_txt;
+    
     /**
      * Tekstinä kuinka monta paria jäljellä
      */
     private JLabel parejajaljella_txt;
+    
     /**
      * Ikkuna (pelipohja)
      */
     private Muistipeli ikkuna;
+    
     /**
      * Käännetyt kortit joille ei ole löytynyt paria
      */
     private Kortit[] kaannettykortti = new Kortit[2];
+    
     /**
      * Valittu liikennemerkkihakemisto (-merkkilaji)
      */
     private int merkkilaji;
+    
     /**
      * Ajastin joka kääntää kortit takaisin (jos ei löytynyt pareja)
      */
     private java.util.Timer ajastin = new java.util.Timer();
+    
     /**
      * Totuusarvo (onko ajastin päällä)
      */
@@ -91,7 +100,6 @@ public class Pelipohja extends JPanel {
                 remove(pelinkortit[i]);
             }
         }
-        //if () for (int i=0; i<pelinkortit.length;i++) remove(pelinkortit[i]);
 
         pelinkortit = new Kortit[(korttipareja * 2)];
 
@@ -127,6 +135,7 @@ public class Pelipohja extends JPanel {
          * Käännettyjen korttien lukumäärä
          */
         private int kaannetytkortit = 0;
+        
         /**
          * Totuusarvo (edellisen yrityksen)
          */
