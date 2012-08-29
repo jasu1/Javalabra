@@ -1,89 +1,124 @@
 package muistipeli;
 
-
 import java.awt.Insets;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-
 /**
- * 
- * @author jarih
+ * Luokka, jossa korttien hakeminen oikeasta hakemistosta määritellään (lisäksi
+ * muut suoranaisesti kortteihin liittyvät tapahtumat).
+ *
+ * @author Jari Haapala
  */
 public class Kortit extends JButton {
+
+    /**
+     * Kortin numero (tunnusnumero, jolla kortille saadaan haettua pari)
+     */
+    private int kortinnumero;
     
+    /**
+     * Pelipohja korttien sijoittelua varten
+     */
+    private Pelipohja pelipohja;
+    
+    /**
+     * Totuusarvo, apumuuttuja (ilmoittaa onko kortti käännetty)
+     */
+    private boolean onkaannetty;
+    
+    /**
+     * Kortissa oleva kuva (näkyy kun kortti on käännetty)
+     */
+    private ImageIcon kortinkuva;
+    
+    /**
+     * Kortin takapuolella oleva kuva (sama hakemisto ja kuva kaikissa korteissa)
+     */
+    private ImageIcon kortintaustakuva;
 
+    /**
+     * Luo pelipohjaan uudet kortit
+     *
+     * @param pelipohja
+     * @param kortinnumero
+     * @param merkkilaji
+     */
+    public Kortit(Pelipohja pelipohja, int kortinnumero, int merkkilaji) {
+        this.kortinnumero = kortinnumero;
+        this.pelipohja = pelipohja;
+        this.onkaannetty = false;
 
-	/** Kortin numero (tunnusnumero, jolla kortille saadaan haettua pari)
-         * @param kortinnumero 
-         */
-	private int kortinnumero;
+        File g = new File("kuvat_kielto/kortintausta.jpg");
 
-	/** Pelipohja korttien sijoittelua varten */
-	private Pelipohja pelipohja;
+        kortintaustakuva = new ImageIcon(g.getPath());
 
-	/** Totuusarvo, apumuuttuja (ilmoittaa onko kortti käännetty) */
-	private boolean onkaannetty;
+        if (merkkilaji == 2) {
+            File f = new File("kuvat_maarays/" + (kortinnumero + 1) + ".jpg");
+            kortinkuva = new ImageIcon(f.getPath());
+            setMargin(new Insets(0, 0, 0, 0));
+            setBorderPainted(false);
+            setIcon(kortintaustakuva);
 
-	/** Kortissa oleva kuva (näkyy kun kortti on käännetty) */
-	private ImageIcon kortinkuva;
-
-	/** Kortin takapuolella oleva kuva (sama kaikissa korteissa) */
-	private ImageIcon kortintaustakuva;
-
-        /** Luo pelipohjaan uuden kortin
-         * @param pelipohja
-         * @param kortinnumero  
-         */
-	public Kortit(Pelipohja pelipohja, int kortinnumero) {
-            this.kortinnumero = kortinnumero;
-            this.pelipohja = pelipohja;
-            this.onkaannetty = false;
-            File g = new File("kuvat/kortintausta.jpg");
-            if (g.exists()) {
-                kortintaustakuva = new ImageIcon(g.getPath());
-            } else kortintaustakuva = null;
-            File f = new File("kuvat/"+(kortinnumero+1)+".jpg");
-            if (f.exists()) {
+        } else {
+            if (merkkilaji == 3) {
+                File f = new File("kuvat_varoitus/" + (kortinnumero + 1) + ".jpg");
                 kortinkuva = new ImageIcon(f.getPath());
-                setMargin(new Insets(0,0,0,0));
+                setMargin(new Insets(0, 0, 0, 0));
+                setBorderPainted(false);
+                setIcon(kortintaustakuva);
+
+            } else {
+                File f = new File("kuvat_kielto/" + (kortinnumero + 1) + ".jpg");
+                kortinkuva = new ImageIcon(f.getPath());
+                setMargin(new Insets(0, 0, 0, 0));
                 setBorderPainted(false);
                 setIcon(kortintaustakuva);
             }
         }
-        
-        /** Palauttaa kortin tunnusnumeron
-         * @return kortin tunnusnumero
-         */
-        public int kortinnumero() {
-            return this.kortinnumero;
-        }
+    }
 
-        /** Palauttaa pelipohjan
-         * @return pelipohja
-         */
-	public Pelipohja pelipohja() {
-            return pelipohja;
-	}
+    /**
+     * Palauttaa kortin tunnusnumeron
+     *
+     * @return kortin tunnusnumero
+     */
+    public int kortinnumero() {
+        return this.kortinnumero;
+    }
 
-        /** Palauttaa totuusarvon (onko kortti käännetty vai ei)
-         * @return onko käännetty
-         */
-	public boolean onKaannetty() {
-            return this.onkaannetty;
-	}
+    /**
+     * Palauttaa pelipohjan
+     *
+     * @return pelipohja
+     */
+    public Pelipohja pelipohja() {
+        return pelipohja;
+    }
 
-	/** Kääntää kortin esille */
-	public void kaannaKuvaEsiin() {
-            onkaannetty=true;
-            setIcon(kortinkuva);
-	}
+    /**
+     * Palauttaa totuusarvon (onko kortti käännetty vai ei)
+     *
+     * @return onko käännetty
+     */
+    public boolean onKaannetty() {
+        return this.onkaannetty;
+    }
 
-	/** Kääntää kortin jälleen nurinpäin */
-	public void piilotaKuva() {
-            onkaannetty=false;
-            setIcon(kortintaustakuva);
-	}
+    /**
+     * Kääntää klikatun kortin näkyviin
+     */
+    public void kaannaKuvaEsiin() {
+        onkaannetty = true;
+        setIcon(kortinkuva);
+    }
 
+    /**
+     * Kääntää kortin jälleen nurinpäin
+     */
+    public void piilotaKuva() {
+        onkaannetty = false;
+        setIcon(kortintaustakuva);
+    }
 }
