@@ -7,15 +7,14 @@ import javax.swing.JPanel;
 
 
 /**
- * Muistipelin graafinen käyttöliittymä ja pääohjelma. Kortit käännetään
- * hiirellä klikkaamalla ja kun kaksi korttia on yhtä aikaa käänettynä, tapahtuu
+ * Muistipelin graafinen käyttöliittymä. Kortit käännetään
+ * hiirellä klikkaamalla ja kun kaksi korttia on yhtä aikaa käännettynä, tapahtuu
  * korttiparin tarkistus. Mikäli kortit ovat samat, ne jäävät näkyviin, muutoin
  * ne kääntyvät piiloon. Pelaaja voi valita pelissä käytettävät kortit
  * hakemistoista liikennemerkkiryhmän perusteella (tällä hetkellä käytettävissä
  * kolme ryhmää).
  *
  * @author Jari Haapala
- * @version 1.0 (29.8.2012)
  */
 public class Muistipeli {
 
@@ -26,7 +25,7 @@ public class Muistipeli {
     
     /**
      * Liikennemerkkiryhmä: ryhmään kuuluvat eri liikennemerkit tarkoituksensa
-     * mukaan jaoteltuna
+     * mukaan jaoteltuna (merkit on tallennettu ryhmän mukaisiin hakemistoihin).
      */
     private int merkkilaji;
     
@@ -40,8 +39,9 @@ public class Muistipeli {
 
     /**
      * Luo uuden muistipelin valitusta liikennemerkkiryhmästä
+     * @param mlaji 
      */
-    private Muistipeli(int mlaji) {
+    public Muistipeli(int mlaji) {
         ikkuna = new JFrame("Muistipeli");
         merkkilaji = mlaji;
         pelipohja = new Pelipohja(this, merkkilaji);
@@ -99,6 +99,7 @@ public class Muistipeli {
                 System.exit(0);
             }
         });
+        
         uusipeli.addActionListener(new ActionListener() {
 
             @Override
@@ -107,6 +108,11 @@ public class Muistipeli {
             }
         });
 
+        // Seuraava määrittelysarja on osittain itseään toistava, mutta 
+        // toisaalta loogisesti selkeä. Ainakin näin saa toimimaan sen, että 
+        // liikennemerkkiryhmää valittaessa ei aikaisemmin valittu
+        // merkkiryhmän täppi jää valikossa päälle. 
+        // Nämä voinee koodata siistimminkin, vaatii jatkotyötä...
         kieltomerkit.addItemListener(new ItemListener() {
 
             @Override
@@ -160,20 +166,11 @@ public class Muistipeli {
     }
 
     /**
-     * Piirtää ikkunan uudestaan
+     * Piirtää pelin ikkunan uudestaan
      */
     public void teeUusiIkkuna() {
         ikkuna.pack();
         ikkuna.setSize(ikkuna.getPreferredSize());
         ikkuna.doLayout();
-    }
-
-    /**
-     * Päämetodi joka käynnistää uuden pelin
-     *
-     * @param args
-     */
-    public static void main(String args[]) {
-        Muistipeli peli = new Muistipeli(1);
     }
 }

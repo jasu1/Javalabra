@@ -50,12 +50,18 @@ public class Kortit extends JButton {
         this.pelipohja = pelipohja;
         this.onkaannetty = false;
 
-        File g = new File("kuvat_kielto/kortintausta.jpg");
+//        File g = new File("kuvat/kortintausta.jpg");
 
-        kortintaustakuva = new ImageIcon(g.getPath());
-
+//        kortintaustakuva = new ImageIcon(g.getPath());
+        
+        // Merkkilajin valintakoodia voisi varmaan siistiä niin, että
+        // yhdistäisi yhteisiä osia (taas turhaa toistoa koodissa). 
+        // Jäi nyt tekemättä, mutta toimii kuitenkin hyvin.
+        // Jatkokehittelyn/miettimisen paikka.
         if (merkkilaji == 2) {
-            File f = new File("kuvat_maarays/" + (kortinnumero + 1) + ".jpg");
+            File g = new File("kuvat/kuvat_maarays/kortintausta.jpg");
+            kortintaustakuva = new ImageIcon(g.getPath());
+            File f = new File("kuvat/kuvat_maarays/" + (kortinnumero + 1) + ".jpg");
             kortinkuva = new ImageIcon(f.getPath());
             setMargin(new Insets(0, 0, 0, 0));
             setBorderPainted(false);
@@ -63,14 +69,18 @@ public class Kortit extends JButton {
 
         } else {
             if (merkkilaji == 3) {
-                File f = new File("kuvat_varoitus/" + (kortinnumero + 1) + ".jpg");
+                File g = new File("kuvat/kuvat_varoitus/kortintausta.jpg");
+                kortintaustakuva = new ImageIcon(g.getPath());
+                File f = new File("kuvat/kuvat_varoitus/" + (kortinnumero + 1) + ".jpg");
                 kortinkuva = new ImageIcon(f.getPath());
                 setMargin(new Insets(0, 0, 0, 0));
                 setBorderPainted(false);
                 setIcon(kortintaustakuva);
 
             } else {
-                File f = new File("kuvat_kielto/" + (kortinnumero + 1) + ".jpg");
+                File g = new File("kuvat/kuvat_kielto/kortintausta.jpg");
+                kortintaustakuva = new ImageIcon(g.getPath());
+                File f = new File("kuvat/kuvat_kielto/" + (kortinnumero + 1) + ".jpg");
                 kortinkuva = new ImageIcon(f.getPath());
                 setMargin(new Insets(0, 0, 0, 0));
                 setBorderPainted(false);
@@ -115,7 +125,7 @@ public class Kortit extends JButton {
     }
 
     /**
-     * Kääntää kortin jälleen nurinpäin
+     * Kääntää kortin jälleen nurinpäin (jos arvaus ei onnistunut)
      */
     public void piilotaKuva() {
         onkaannetty = false;

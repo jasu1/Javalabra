@@ -12,6 +12,8 @@ import javax.swing.JPanel;
  * GridLayout-asettelu sopii tähän. Käytettävissä on liikennemerkkiryhmittäin 
  * kolme kuvahakemistoa mistä kuvat haetaan 
  * (kuvat_kielto, kuvat_maarays, kuvat_varoitus)
+ * 
+ * @author Jari Haapala
  */
 public class Pelipohja extends JPanel {
 
@@ -46,7 +48,7 @@ public class Pelipohja extends JPanel {
     private Muistipeli ikkuna;
     
     /**
-     * Käännetyt kortit joille ei ole löytynyt paria
+     * Käännetyt kortit joille ei löytynyt paria
      */
     private Kortit[] kaannettykortti = new Kortit[2];
     
@@ -61,7 +63,7 @@ public class Pelipohja extends JPanel {
     private java.util.Timer ajastin = new java.util.Timer();
     
     /**
-     * Totuusarvo (onko ajastin päällä)
+     * Totuusarvo ajastimelle
      */
     private boolean ajastinpaalla = false;
 
@@ -114,7 +116,6 @@ public class Pelipohja extends JPanel {
             // Alustetaan arvattu_txt ja parejajaljella_txt
             arvattu_txt = new JLabel("  Arvattu pareja: 0");
             arvattu_txt.setForeground(Color.black);
-//                arvattu_txt.setText("  Arvaukset: 0");
             parejajaljella_txt = new JLabel("  Pareja jäljellä: " + korttipareja);
             parejajaljella_txt.setForeground(Color.black);
             this.arvaukset = 0;
@@ -142,8 +143,8 @@ public class Pelipohja extends JPanel {
         private boolean arvausvaarin = false;
 
         /**
-         * Ajastimen määräämä toiminto (piilottaa käännetyt kortit näkyvistä jos
-         * säädetty aikaraja tulee vastaan
+         * Ajastimen määräämä toiminto (piilottaa käännetyt kortit näkyvistä 
+         * jos säädetty aikaraja tulee vastaan)
          */
         @Override
         public void run() {
@@ -234,8 +235,8 @@ public class Pelipohja extends JPanel {
 
 
         // Taulukon sekoitus. Jokaiselle taulukon alkiolle arvotaan pari
-        // (samasta taulukosta). Nämä vaihtavat paikkaa, arvonta 
-        // toistetaan niin kauan saadaan kaikki parit ja 
+        // (samasta taulukosta). Nämä vaihtavat paikkaa, arvontaa 
+        // toistetaan niin kauan että saadaan kaikki parit ja sen jälkeen
         // tulos palautetaan
         for (int i = 0; i < indeksienmaara; i++) {
             apu = aputaulukko[i];
