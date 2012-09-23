@@ -76,6 +76,7 @@ public class Kortit extends JButton {
                 setMargin(new Insets(0, 0, 0, 0));
                 setBorderPainted(false);
                 setIcon(kortintaustakuva);
+                
 
             } else {
                 File g = new File("kuvat/kuvat_kielto/kortintausta.jpg");
@@ -85,9 +86,10 @@ public class Kortit extends JButton {
                 setMargin(new Insets(0, 0, 0, 0));
                 setBorderPainted(false);
                 setIcon(kortintaustakuva);
+                                   
+                }
             }
         }
-    }
 
     /**
      * Palauttaa kortin tunnusnumeron
